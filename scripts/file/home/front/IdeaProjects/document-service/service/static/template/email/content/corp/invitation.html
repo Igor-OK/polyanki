@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        width: 1000px;
+        margin: 0 auto;
+    }
+
+    .input {
+        border: 1px dashed lightgray;
+        border-bottom: 1px solid gray;
+        margin-left: 20px;
+    }
+    .input p {
+        margin: 5px;
+    }
+
+    .point {
+        margin-bottom: 5px;
+    }
+
+    .cells {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .right-border-dash {
+        border-right: 1px dashed lightgray;
+    }
+
+    .left {text-align: left;}
+    .center {text-align: center;}
+    .right {text-align: right;}
+
+    .bottom-line {
+        border-bottom: 2px solid gray;
+        height: 25px;
+        margin-bottom: 30px;
+    }
+
+    .date-signature-block {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+
+
+
+</style>
+<body>
+    <h1 class="center"> Письмо <br> о намерениях получения специальных условий <br> по программе S7 Corp </h1>
+
+    <h2 class="right"> Кому: <br> АО «Авиакомпания «Сибирь» </h2>
+
+    <p>Ознакомившись с  Правилами программы S7 Corp на сайте <a href="https://www.s7.ru/ru/rules/s7corp-rules/">https://www.s7.ru/ru/rules/s7corp-rules/</a>,  заявляем о намерении получения специальных условий на условиях программы S7 Corp, для чего: </p>
+
+
+
+    <h2 class="left">1. Предоставляем данные о себе:</h2>
+
+    <p class="point">Полное наименование</p>
+    <div class="input">
+        <p>{Полное название компании (FullNAme)}</p>
+    </div>
+
+    <p class="point">Идентификационный номер налогоплательщика (ИНН)</p>
+    <div class="input">
+        <p>{ИНН}</p>
+    </div>
+
+    <p class="point">Основной гос. регистрационный номер (ОГРН)</p>
+    <div class="input">
+        <p>{ОГРН}</p>
+    </div>
+
+<!--    todo-->
+    <p class="point">Индекс &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; регион &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; город &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; улица &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; дом/корпус &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; офис/каб и т.д</p>
+    <div class="input">
+        <p>{Юридический адрес}</p>
+    </div>
+
+
+
+
+    <h2 class="left">2. Назначаем Администратором программы S7 Corp:</h2>
+
+    <!--    todo-->
+    <div class="input cells">
+        <div class="right-border-dash"><p>{Фамилия}</p></div>
+        <div class="right-border-dash"><p>{Имя}</p></div>
+        <div><p>{Должность}</p></div>
+    </div>
+    <div class="input cells">
+        <div class="right-border-dash"><p>Фамилия</p></div>
+        <div class="right-border-dash"><p>Имя</p></div>
+        <div><p>Должность</p></div>
+    </div>
+
+    <p class="point">Е-mail</p>
+    <div class="input">
+        <p>{email}</p>
+    </div>
+
+    <p class="point">Контактный телефон</p>
+    <div class="input">
+        <p>{телефон}</p>
+    </div>
+
+
+    <h2 class="left">3. Предоставляем и подтверждаем в полном объеме заверения и гарантии, предусмотренные разделом 8 Правил программы S7 Corp.</h2>
+
+    <p>Руководитель (ФИО, должность) / Лицо, действующее по доверенности (ФИО, реквизиты доверенности), если заявку подписывает лицо по доверенности:</p>
+
+    <div class="bottom-line"></div>
+
+    <div class="date-signature-block">
+        <div class="date-block">Дата "_____"_______________20__ г.</div>
+        <div class="signature-block">Подпись ____________________ / М.П. ________________   /</div>
+    </div>
+
+    <p>Приложение: </p>
+    <p>скан-образ доверенности (если Письмо подписано лицом по доверенности).</p>
+
+
+
+</body>
+</html>

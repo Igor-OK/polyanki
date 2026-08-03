@@ -112,7 +112,11 @@
             </div>
         </div>
 
-        <ul class="navigation font-nunito">
+        <button class="nav-toggle" type="button" aria-label="Открыть меню" aria-controls="primary-navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+
+        <ul class="navigation font-nunito" id="primary-navigation">
             <li class="js_navigation_item nav_item active" data-item="aboutUs">
                 <a href="#about_us">О НАС</a>
             </li>
@@ -355,7 +359,7 @@
                     <div class="month">January 2024</div>
                     <div class="btns">
                         <button class="btn today-btn" type="button" aria-label="Сегодня">
-                            <i class="fas fa-calendar-day" aria-hidden="true"></i>
+                            <span aria-hidden="true">↺</span>
                         </button>
                         <button class="btn prev-btn" type="button" aria-label="Предыдущий месяц">
                             &lt;
@@ -376,6 +380,11 @@
                 </div>
                 <div class="days">
                     <!-- Дни добавляются через JS -->
+                </div>
+                <div class="calendar-legend font-nunito" aria-label="Обозначения календаря">
+                    <span><i class="legend-dot free-dot"></i>Свободно</span>
+                    <span><i class="legend-dot booked-dot"></i>Занято</span>
+                    <span><i class="legend-dot today-dot"></i>Сегодня</span>
                 </div>
             </div>
         </div>
@@ -442,6 +451,7 @@
 </footer>
 
 <script src="./scripts/main.js" defer></script>
+<script src="./scripts/calendar.js" defer></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const yearSpan = document.getElementById('currentYear');

@@ -492,6 +492,58 @@ main {
 .today-dot { background: #747c62; }
 .nav-toggle { display: none; }
 
+/* Состояния дат, рассчитанные из интервалов заезда и выезда */
+.days .calendar-day {
+    position: relative;
+    border: 0;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+}
+.days .calendar-day.state-free { color: #466146; background: #dfeedd; }
+/* Выезд: первая половина дня занята, вторая свободна */
+.days .calendar-day.state-checkout {
+    color: #5f4848;
+    background: linear-gradient(135deg, var(--booking-before, #a84f49) 0 49%, #dfeedd 50% 100%);
+}
+/* Заезд: первая половина дня свободна, вторая занята */
+.days .calendar-day.state-checkin {
+    color: #5f4848;
+    background: linear-gradient(135deg, #dfeedd 0 49%, var(--booking-after, #a84f49) 50% 100%);
+}
+/* Пересменка: выезд и следующий заезд приходятся на одну дату */
+.days .calendar-day.state-turnover {
+    color: #fff;
+    background: linear-gradient(135deg, var(--booking-before, #a84f49) 0 46%, #dfeedd 47% 53%, var(--booking-after, #a84f49) 54% 100%);
+}
+.days .calendar-day.state-occupied { color: #fff; background: var(--booking-after, #a84f49); }
+.days .calendar-day.today {
+    color: inherit;
+    box-shadow: inset 0 0 0 3px #747c62;
+}
+.days .calendar-day.selected {
+    outline: 3px solid #515151;
+    outline-offset: 2px;
+    z-index: 1;
+}
+.free-dot { background: #dfeedd; box-shadow: inset 0 0 0 1px #c2d9bf; }
+.checkout-dot { background: linear-gradient(135deg, #a84f49 0 49%, #dfeedd 50% 100%); }
+.checkin-dot { background: linear-gradient(135deg, #dfeedd 0 49%, #a84f49 50% 100%); }
+.turnover-dot { background: linear-gradient(135deg, #a84f49 0 46%, #dfeedd 47% 53%, #a84f49 54% 100%); }
+.occupied-dot { background: #a84f49; }
+.calendar-day-details {
+    min-height: 26px;
+    margin-top: 22px;
+    padding: 16px 18px;
+    border-radius: 10px;
+    color: #515151;
+    background: #f6f4ef;
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+}
+.calendar-day-details strong { white-space: nowrap; }
+.calendar.is-loading .days { opacity: .45; }
+
 @media (max-width: 767px) {
     html { scroll-behavior: smooth; overflow-x: hidden; }
     html body { width: 100%; min-width: 0; box-shadow: none; overflow-x: hidden; }
@@ -574,6 +626,7 @@ main {
     .weekdays .day { font-size: 13px; margin-top: 4px; color: #777b6e; }
     .days .day { height: 40px; font-size: 14px; border-radius: 7px; }
     .calendar-legend { gap: 12px; justify-content: center; flex-wrap: wrap; font-size: 12px; }
+    .calendar-day-details { flex-direction: column; gap: 4px; font-size: 13px; line-height: 1.45; }
     #recipe .description-block, #contacts .description-block { padding: 8px 24px 0; }
     #contacts address { line-height: 1.8; overflow-wrap: anywhere; }
     footer .row { padding: 28px 24px; gap: 14px; }

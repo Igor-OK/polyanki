@@ -1,168 +1,423 @@
 (function () {
-// ===============================
-// НАСТРОЙКИ КАЛЕНДАРЯ
-// ===============================
+  "use strict";
 
-// Пример данных: ключ - дата, значение - booked: true/false
-// В реальном проекте можно подгружать этот JSON с сервера.
-const bookingData = {
-    "2025-01-05": { booked: true },
-    "2025-01-06": { booked: true },
-    "2025-01-12": { booked: true },
-  
-    "2025-02-10": { booked: true },
-    "2025-02-11": { booked: true },
-  
-    "2025-06-01": { booked: true },
-    "2025-06-02": { booked: true },
-    "2025-06-03": { booked: true }
-  
-    // и так далее...
+  /*
+   * URL будущего API.
+   *
+   * После публикации Google Apps Script достаточно задать адрес до подключения
+   * calendar.js:
+   * window.POLYANKI_CALENDAR_API_URL = "https://script.google.com/macros/s/.../exec";
+   *
+   * Пока адрес пустой, календарь использует демонстрационные интервалы ниже.
+   */
+  const API_URL = window.POLYANKI_CALENDAR_API_URL || "";
+  const TIMEZONE = "Europe/Minsk";
+  const CHECK_OUT_TIME = "12:00";
+  const CHECK_IN_TIME = "15:00";
+
+  const calendarEl = document.querySelector(".calendar");
+  if (!calendarEl) return;
+
+  const monthTitleEl = calendarEl.querySelector(".month");
+  const daysContainerEl = calendarEl.querySelector(".days");
+  const detailsEl = calendarEl.querySelector(".calendar-day-details");
+  const prevBtn = calendarEl.querySelector(".prev-btn");
+  const nextBtn = calendarEl.querySelector(".next-btn");
+  const todayBtn = calendarEl.querySelector(".today-btn");
+
+  const monthNamesRu = [
+    "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+    "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
+  ];
+
+  const dayStateNames = {
+    free: "Свободно",
+    checkin: "Частично свободно — заезд",
+    checkout: "Частично свободно — выезд",
+    turnover: "Смена гостей",
+    occupied: "Занято"
   };
 
+  /*
+   * Близкие оттенки бордового помогают визуально отделить соседние заезды.
+   * Цвет выбирается по ID: все дни одного бронирования всегда получают
+   * одинаковый оттенок, даже после обновления страницы.
+   */
+  const bookingColors = ["#7f3035", "#b6534b", "#933f5a", "#c66e5e"];
 
+  let currentYear = new Date().getFullYear();
+  let currentMonthIndex = new Date().getMonth();
+  let calendarEvents = [];
+  let selectedDate = null;
 
-// Для какого года генерируем 12 месяцев
-let currentYear = new Date().getFullYear();
+  /*
+   * Демонстрационные события повторяют структуру ответа будущего API.
+   * Они нужны только для разработки и автоматически создаются рядом с текущей датой.
+   * Персональные данные гостей в публичный API передавать не следует.
+   */
+  function createDemoEvents() {
+    const year = new Date().getFullYear();
+    const month = new Date().getMonth();
 
-// Текущий отображаемый месяц (0-11)
-let currentMonthIndex = new Date().getMonth();
-
-// Локализованные названия месяцев (для заголовка)
-const monthNamesRu = [
-  "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
-  "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
-];
-
-// Выбор элементов DOM
-const calendarEl = document.querySelector(".calendar");
-if (!calendarEl) return;
-const monthTitleEl = calendarEl.querySelector(".month");
-const daysContainerEl = calendarEl.querySelector(".days");
-const prevBtn = calendarEl.querySelector(".prev-btn");
-const nextBtn = calendarEl.querySelector(".next-btn");
-const todayBtn = calendarEl.querySelector(".today-btn");
-
-// ===============================
-// ХЕЛПЕРЫ
-// ===============================
-
-// Получить строку даты в формате YYYY-MM-DD
-function formatDate(year, monthIndex, day) {
-  const mm = String(monthIndex + 1).padStart(2, "0");
-  const dd = String(day).padStart(2, "0");
-  return `${year}-${mm}-${dd}`;
-}
-
-// Проверить, забронирован ли день
-function isBooked(dateStr) {
-  const info = bookingData[dateStr];
-  return info && info.booked === true;
-}
-
-// ===============================
-// РЕНДЕР КАЛЕНДАРЯ
-// ===============================
-
-function renderCalendar(year, monthIndex) {
-  // Заголовок: "Месяц Год"
-  monthTitleEl.textContent = `${monthNamesRu[monthIndex]} ${year}`;
-
-  // Очищаем контейнер с днями
-  daysContainerEl.innerHTML = "";
-
-  // Дата первого дня месяца
-  const firstDayOfMonth = new Date(year, monthIndex, 1);
-  const firstWeekday = firstDayOfMonth.getDay(); // 0 - воскресенье, 1 - понедельник, ...
-
-  // Кол-во дней в месяце
-  const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
-
-  // Нам нужно сдвинуть начало, чтобы дни начинались в правильный день недели
-  // В твоей шапке недели порядок: Вс, Пн, Вт, Ср, Чт, Пт, Сб
-  // getDay() как раз возвращает 0 для Вс, так что можно использовать напрямую.
-
-  // Рисуем пустые слоты перед началом месяца (если нужно)
-for (let i = 0; i < firstWeekday; i++) {
-    const emptyCell = document.createElement("div");
-    emptyCell.classList.add("day", "empty");
-    daysContainerEl.appendChild(emptyCell);
+    return [
+      {
+        id: "demo-booking-1",
+        type: "booking",
+        status: "confirmed",
+        start: toLocalIso(year, month, 5, CHECK_IN_TIME),
+        end: toLocalIso(year, month, 9, CHECK_OUT_TIME)
+      },
+      {
+        id: "demo-booking-2",
+        type: "booking",
+        status: "confirmed",
+        start: toLocalIso(year, month, 9, CHECK_IN_TIME),
+        end: toLocalIso(year, month, 12, CHECK_OUT_TIME)
+      },
+      {
+        id: "demo-pending",
+        type: "booking",
+        status: "pending",
+        start: toLocalIso(year, month, 18, CHECK_IN_TIME),
+        end: toLocalIso(year, month, 21, CHECK_OUT_TIME)
+      },
+      {
+        id: "demo-maintenance",
+        type: "blocked",
+        status: "confirmed",
+        start: toLocalIso(year, month, 25, "09:00"),
+        end: toLocalIso(year, month, 26, "18:00")
+      }
+    ];
   }
-  
-  // Рисуем реальные дни месяца
-  for (let day = 1; day <= daysInMonth; day++) {
-    const cell = document.createElement("div");
-    cell.classList.add("day");
-  
-    const dateStr = formatDate(year, monthIndex, day);
-    const booked = isBooked(dateStr);
-  
-    if (booked) {
-      cell.classList.add("booked");
-      cell.setAttribute("data-status", "booked");
-      cell.setAttribute("title", `Занято: ${dateStr}`);
-    } else {
-      cell.classList.add("free");
-      cell.setAttribute("data-status", "free");
-      cell.setAttribute("title", `Свободно: ${dateStr}`);
+
+  /*
+   * Формирует ISO-строку с минским смещением.
+   * Для реального API смещение уже должно приходить в полях start и end.
+   */
+  function toLocalIso(year, monthIndex, day, time) {
+    const month = String(monthIndex + 1).padStart(2, "0");
+    const date = String(day).padStart(2, "0");
+    return `${year}-${month}-${date}T${time}:00+03:00`;
+  }
+
+  /*
+   * Загружает интервалы бронирований.
+   * Ожидаемый ответ API:
+   * {
+   *   "timezone": "Europe/Minsk",
+   *   "updatedAt": "2026-08-03T14:30:00Z",
+   *   "events": [{ "id", "type", "status", "start", "end" }]
+   * }
+   */
+  async function loadCalendarEvents() {
+    setLoading(true);
+
+    if (!API_URL) {
+      calendarEvents = normalizeEvents(createDemoEvents());
+      setLoading(false);
+      return;
     }
 
+    try {
+      const response = await fetch(API_URL, {
+        method: "GET",
+        headers: { "Accept": "application/json" }
+      });
+
+      if (!response.ok) {
+        throw new Error(`API календаря вернул код ${response.status}`);
+      }
+
+      const payload = await response.json();
+      if (!payload || !Array.isArray(payload.events)) {
+        throw new Error("В ответе API отсутствует массив events");
+      }
+
+      calendarEvents = normalizeEvents(payload.events);
+      calendarEl.dataset.updatedAt = payload.updatedAt || "";
+      calendarEl.dataset.timezone = payload.timezone || TIMEZONE;
+      saveEventsToCache(payload);
+    } catch (error) {
+      console.error("Не удалось обновить календарь:", error);
+
+      const cachedEvents = readEventsFromCache();
+      calendarEvents = cachedEvents.length ? cachedEvents : normalizeEvents(createDemoEvents());
+      showSystemMessage(
+        cachedEvents.length
+          ? "Не удалось обновить данные. Показана последняя сохранённая версия."
+          : "API пока недоступен. Показаны демонстрационные данные."
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  /*
+   * Проверяет входящие события и заранее преобразует даты.
+   * Некорректные или отменённые записи не участвуют в расчёте.
+   */
+  function normalizeEvents(events) {
+    return events
+      .filter(event => event && event.status !== "cancelled")
+      .map(event => ({
+        id: String(event.id || ""),
+        type: event.type === "blocked" ? "blocked" : "booking",
+        status: event.status === "pending" ? "pending" : "confirmed",
+        start: new Date(event.start),
+        end: new Date(event.end)
+      }))
+      .filter(event => (
+        !Number.isNaN(event.start.getTime()) &&
+        !Number.isNaN(event.end.getTime()) &&
+        event.end > event.start
+      ))
+      .sort((first, second) => first.start - second.start)
+      .map((event, index) => ({
+        ...event,
+        /* Соседние по времени бронирования гарантированно получают разные оттенки. */
+        color: bookingColors[index % bookingColors.length]
+      }));
+  }
+
+  /*
+   * Рассчитывает состояние одной даты из интервалов.
+   * В базе не нужно хранить отдельные статусы каждого дня:
+   * они пересчитываются автоматически после переноса бронирования.
+   */
+  function calculateDayState(year, monthIndex, day) {
+    const dayStart = new Date(year, monthIndex, day, 0, 0, 0);
+    const dayEnd = new Date(year, monthIndex, day + 1, 0, 0, 0);
+
+    const overlapping = calendarEvents.filter(event => (
+      event.start < dayEnd && event.end > dayStart
+    ));
+
+    /*
+     * Для посетителя важна только доступность. Поэтому технические блокировки
+     * и предварительные брони показываются как занятый период.
+     */
+    const unavailableEvents = overlapping.filter(event => (
+      event.type === "blocked" || event.status === "pending"
+    ));
+    const bookings = overlapping.filter(event => (
+      event.type === "booking" && event.status === "confirmed"
+    ));
+
+    const checkins = bookings.filter(event => isSameLocalDay(event.start, dayStart));
+    const checkouts = bookings.filter(event => isSameLocalDay(event.end, dayStart));
+    const staysThroughDay = bookings.some(event => (
+      event.start < dayStart && event.end >= dayEnd
+    ));
+
+    let state = "free";
+    if (unavailableEvents.length) state = "occupied";
+    else if (checkins.length && checkouts.length) state = "turnover";
+    else if (checkins.length) state = "checkin";
+    else if (checkouts.length) state = "checkout";
+    else if (staysThroughDay || bookings.length) state = "occupied";
+
+    return {
+      date: formatDate(year, monthIndex, day),
+      state,
+      checkIn: checkins[0] ? formatTime(checkins[0].start) : null,
+      checkOut: checkouts[0] ? formatTime(checkouts[0].end) : null,
+      nightAvailable: !bookings.some(event => event.end > new Date(year, monthIndex, day, 18, 0, 0)),
+      events: overlapping,
+      /* Левая часть относится к гостям, которые уже проживают или выезжают. */
+      colorBefore: getBookingColor(
+        checkouts[0]?.id || bookings.find(event => event.start < dayStart)?.id || unavailableEvents[0]?.id
+      ),
+      /* Правая часть относится к гостям, которые заезжают или продолжают проживание. */
+      colorAfter: getBookingColor(
+        checkins[0]?.id || bookings.find(event => event.end > dayEnd)?.id || bookings[0]?.id || unavailableEvents[0]?.id
+      )
+    };
+  }
+
+  function getBookingColor(bookingId) {
+    if (!bookingId) return bookingColors[0];
+
+    const event = calendarEvents.find(item => item.id === String(bookingId));
+    if (event?.color) return event.color;
+
+    let hash = 0;
+    for (const character of String(bookingId)) {
+      hash = ((hash << 5) - hash + character.charCodeAt(0)) | 0;
+    }
+
+    return bookingColors[Math.abs(hash) % bookingColors.length];
+  }
+
+  function renderCalendar() {
+    monthTitleEl.textContent = `${monthNamesRu[currentMonthIndex]} ${currentYear}`;
+    daysContainerEl.innerHTML = "";
+
+    const firstWeekday = new Date(currentYear, currentMonthIndex, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonthIndex + 1, 0).getDate();
+
+    for (let i = 0; i < firstWeekday; i++) {
+      const emptyCell = document.createElement("span");
+      emptyCell.className = "day empty";
+      emptyCell.setAttribute("aria-hidden", "true");
+      daysContainerEl.appendChild(emptyCell);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayData = calculateDayState(currentYear, currentMonthIndex, day);
+      const cell = document.createElement("button");
+
+      cell.type = "button";
+      cell.className = `day calendar-day state-${dayData.state}`;
+      cell.textContent = String(day);
+      cell.dataset.date = dayData.date;
+      cell.dataset.state = dayData.state;
+      /* CSS использует эти цвета для цельной цепочки одного бронирования. */
+      cell.style.setProperty("--booking-before", dayData.colorBefore);
+      cell.style.setProperty("--booking-after", dayData.colorAfter);
+      cell.setAttribute("aria-label", createDayAriaLabel(dayData));
+      cell.setAttribute("title", createDayDescription(dayData));
+
+      if (isToday(currentYear, currentMonthIndex, day)) {
+        cell.classList.add("today");
+        cell.setAttribute("aria-current", "date");
+      }
+
+      if (selectedDate === dayData.date) {
+        cell.classList.add("selected");
+      }
+
+      cell.addEventListener("click", () => {
+        selectedDate = dayData.date;
+        showDayDetails(dayData);
+        renderCalendar();
+      });
+
+      daysContainerEl.appendChild(cell);
+    }
+  }
+
+  function createDayDescription(dayData) {
+    return dayStateNames[dayData.state];
+  }
+
+  function createDayAriaLabel(dayData) {
+    return `${formatDateForHuman(dayData.date)}. ${createDayDescription(dayData)}`;
+  }
+
+  function showDayDetails(dayData) {
+    if (!detailsEl) return;
+    detailsEl.innerHTML = `
+      <strong>${formatDateForHuman(dayData.date)}</strong>
+      <span>${createDayDescription(dayData)}</span>
+    `;
+  }
+
+  function showSystemMessage(message) {
+    if (!detailsEl) return;
+    detailsEl.innerHTML = `<strong>Обновление календаря</strong><span>${message}</span>`;
+  }
+
+  function setLoading(isLoading) {
+    calendarEl.classList.toggle("is-loading", isLoading);
+    calendarEl.setAttribute("aria-busy", String(isLoading));
+  }
+
+  /*
+   * Кэш нужен только как резерв на случай временной недоступности API.
+   * Он не используется как источник для редактирования данных.
+   */
+  function saveEventsToCache(payload) {
+    try {
+      localStorage.setItem("polyanki-calendar-cache", JSON.stringify(payload));
+    } catch (error) {
+      console.warn("Не удалось сохранить кэш календаря:", error);
+    }
+  }
+
+  function readEventsFromCache() {
+    try {
+      const raw = localStorage.getItem("polyanki-calendar-cache");
+      if (!raw) return [];
+      const payload = JSON.parse(raw);
+      return Array.isArray(payload.events) ? normalizeEvents(payload.events) : [];
+    } catch (error) {
+      console.warn("Не удалось прочитать кэш календаря:", error);
+      return [];
+    }
+  }
+
+  function formatDate(year, monthIndex, day) {
+    return `${year}-${String(monthIndex + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+  }
+
+  function formatDateForHuman(dateString) {
+    const [year, month, day] = dateString.split("-").map(Number);
+    return new Intl.DateTimeFormat("ru-RU", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    }).format(new Date(year, month - 1, day));
+  }
+
+  function formatTime(date) {
+    return new Intl.DateTimeFormat("ru-RU", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: TIMEZONE
+    }).format(date);
+  }
+
+  function isSameLocalDay(firstDate, secondDate) {
+    return (
+      firstDate.getFullYear() === secondDate.getFullYear() &&
+      firstDate.getMonth() === secondDate.getMonth() &&
+      firstDate.getDate() === secondDate.getDate()
+    );
+  }
+
+  function isToday(year, monthIndex, day) {
     const today = new Date();
-    if (day === today.getDate() && monthIndex === today.getMonth() && year === today.getFullYear()) {
-      cell.classList.add("today");
-      cell.setAttribute("aria-current", "date");
+    return (
+      day === today.getDate() &&
+      monthIndex === today.getMonth() &&
+      year === today.getFullYear()
+    );
+  }
+
+  function showPrevMonth() {
+    currentMonthIndex--;
+    if (currentMonthIndex < 0) {
+      currentMonthIndex = 11;
+      currentYear--;
     }
-  
-    cell.textContent = day;
-    cell.dataset.date = dateStr;
-  
-    daysContainerEl.appendChild(cell);
+    selectedDate = null;
+    renderCalendar();
   }
-  
-}
 
-// ===============================
-// ПЕРЕКЛЮЧЕНИЕ МЕСЯЦЕВ
-// ===============================
-
-function showPrevMonth() {
-  currentMonthIndex--;
-  if (currentMonthIndex < 0) {
-    currentMonthIndex = 11;
-    currentYear--;
+  function showNextMonth() {
+    currentMonthIndex++;
+    if (currentMonthIndex > 11) {
+      currentMonthIndex = 0;
+      currentYear++;
+    }
+    selectedDate = null;
+    renderCalendar();
   }
-  renderCalendar(currentYear, currentMonthIndex);
-}
 
-function showNextMonth() {
-  currentMonthIndex++;
-  if (currentMonthIndex > 11) {
-    currentMonthIndex = 0;
-    currentYear++;
+  function showCurrentMonth() {
+    const today = new Date();
+    currentYear = today.getFullYear();
+    currentMonthIndex = today.getMonth();
+    selectedDate = formatDate(currentYear, currentMonthIndex, today.getDate());
+    renderCalendar();
+    showDayDetails(calculateDayState(currentYear, currentMonthIndex, today.getDate()));
   }
-  renderCalendar(currentYear, currentMonthIndex);
-}
 
-function showCurrentMonth() {
-  const today = new Date();
-  currentYear = today.getFullYear();
-  currentMonthIndex = today.getMonth();
-  renderCalendar(currentYear, currentMonthIndex);
-}
+  prevBtn?.addEventListener("click", showPrevMonth);
+  nextBtn?.addEventListener("click", showNextMonth);
+  todayBtn?.addEventListener("click", showCurrentMonth);
 
-// ===============================
-// ОБРАБОТЧИКИ КНОПОК
-// ===============================
-
-if (prevBtn) prevBtn.addEventListener("click", showPrevMonth);
-if (nextBtn) nextBtn.addEventListener("click", showNextMonth);
-if (todayBtn) todayBtn.addEventListener("click", showCurrentMonth);
-
-// ===============================
-// ПЕРВИЧНЫЙ РЕНДЕР: 12 МЕСЯЦЕВ В ГОДУ
-// ===============================
-// По факту мы в интерфейсе показываем по одному месяцу,
-// но логика рассчитана на любые 12 месяцев конкретного года.
-// Начинаем с текущего месяца:
-renderCalendar(currentYear, currentMonthIndex);
+  loadCalendarEvents().then(renderCalendar);
 })();

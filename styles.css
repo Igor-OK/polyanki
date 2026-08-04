@@ -55,6 +55,10 @@
 .activity-beach {background: url("./img/header4.jpg");}
 .activity-fishing {background: url("./img/fishing.jpg");}
 .activity-forest {background: url("./img/forest.jpg");}
+.activity-tree-house {background: url("./img/tree-house-activity.jpg");}
+.activity-board-games {background: url("./img/board-games.jpg");}
+.activity-table-tennis {background: url("./img/table-tennis.jpg");}
+.activity-pond-fishing {background: url("./img/pond-fishing.jpg");}
 
 .cover {
     background-repeat: no-repeat;
@@ -353,6 +357,8 @@ main {
     background-position: center;
     background-size: cover;
 }
+.activity-image.activity-board-games {background-position: center 16%;}
+.activity-image.activity-pond-fishing {background-position: center 68%;}
 
 
 

@@ -52,7 +52,7 @@
 /*backgrounds*/
 .about-us-image {background: url("./img/about_us.jpg");}
 
-.activity-beach {background: url("./img/header4.jpg");}
+.activity-beach {background: url("./img/beach.jpg");}
 .activity-fishing {background: url("./img/fishing.jpg");}
 .activity-forest {background: url("./img/forest.jpg");}
 .activity-tree-house {background: url("./img/tree-house-activity.jpg");}
@@ -609,7 +609,7 @@ main {
     #about_us .image-block, #deploy .image-block { height: 360px; }
     #about_us .gallery-cover-seo, #deploy .gallery-cover-seo { height: 360px; }
     .gallery-slide-description-seo, .gallery-slide-description {
-        height: 100%; padding: 36px 24px 62px;
+        height: 100%; width: 100%; padding: 36px 24px 62px;
         background: linear-gradient(transparent 35%, rgba(0,0,0,.72));
     }
     .gallery-controls { bottom: 22px; }

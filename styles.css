@@ -296,7 +296,7 @@ nav.scrolled {
 .header-image {
     height: 670px;
     width: 100%;
-    background: url("./img/header3.jpg");
+    background: url("./img/header.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -607,7 +607,7 @@ main {
     .padding-bottom-60 { padding-bottom: 48px; }
     .margin-top-60 { margin-top: 0; }
     #about_us .image-block, #deploy .image-block { height: 360px; }
-    #about_us .gallery-cover-seo { height: 360px; }
+    #about_us .gallery-cover-seo, #deploy .gallery-cover-seo { height: 360px; }
     .gallery-slide-description-seo, .gallery-slide-description {
         height: 100%; padding: 36px 24px 62px;
         background: linear-gradient(transparent 35%, rgba(0,0,0,.72));

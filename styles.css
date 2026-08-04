@@ -52,7 +52,7 @@
 /*backgrounds*/
 .about-us-image {background: url("./img/about_us.jpg");}
 
-.activity-beach {background: url("./img/beach.jpg");}
+.activity-beach {background: url("./img/header4.jpg");}
 .activity-fishing {background: url("./img/fishing.jpg");}
 .activity-forest {background: url("./img/forest.jpg");}
 .activity-tree-house {background: url("./img/tree-house-activity.jpg");}
@@ -586,7 +586,16 @@ main {
     .nav_item { margin: 0; border-bottom: 1px solid #eceae4; }
     .nav_item:last-child { border-bottom: 0; }
     .nav_item a { display: block; padding: 13px 0; }
-    .header-image { height: min(720px, 100svh); min-height: 590px; background-position: 62% bottom; }
+    .header-image {
+        height: 100vh;
+        height: 100dvh;
+        min-height: 0;
+        position: relative;
+        background-image: url("./img/header.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 62% bottom;
+    }
     .header-image::after {
         content: ''; position: absolute; inset: 0;
         background: linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.08) 45%, rgba(0,0,0,.62));
@@ -609,7 +618,7 @@ main {
     #about_us .image-block, #deploy .image-block { height: 360px; }
     #about_us .gallery-cover-seo, #deploy .gallery-cover-seo { height: 360px; }
     .gallery-slide-description-seo, .gallery-slide-description {
-        height: 100%; width: 100%; padding: 36px 24px 62px;
+        height: 100%; padding: 36px 24px 62px;
         background: linear-gradient(transparent 35%, rgba(0,0,0,.72));
     }
     .gallery-controls { bottom: 22px; }

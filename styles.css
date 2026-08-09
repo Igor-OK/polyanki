@@ -52,16 +52,6 @@
 /*backgrounds*/
 .about-us-image {background: url("./img/about_us.jpg");}
 
-.activity-beach {background: url("./img/beach.jpg");}
-.activity-fishing {background: url("./img/fishing.jpg");}
-.activity-forest {background: url("./img/forest.jpg");}
-.activity-tree-house {background: url("./img/tree-house-activity.jpg");}
-.activity-board-games {background: url("./img/board-games.jpg");}
-.activity-table-tennis {background: url("./img/table-tennis.jpg");}
-.activity-pond-fishing {background: url("./img/pond-fishing.jpg");}
-.activity-basketball {background: url("./img/basketball.jpg");}
-.activity-dvd-films {background: url("./img/dvd-films.jpg");}
-
 .cover {
     background-repeat: no-repeat;
     background-size: cover;
@@ -356,11 +346,17 @@ main {
 }
 
 .activity-image {
-    background-position: center;
-    background-size: cover;
+    overflow: hidden;
 }
-.activity-image.activity-board-games {background-position: center 16%;}
-.activity-image.activity-pond-fishing {background-position: center 68%;}
+.activity-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+.activity-image.activity-board-games img {object-position: center 16%;}
+.activity-image.activity-pond-fishing img {object-position: center 68%;}
 
 
 

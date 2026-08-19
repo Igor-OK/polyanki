@@ -47,24 +47,31 @@
           "description": "Аренда домика в деревне Полянки для семейного отдыха рядом с пляжем Белый Берег и рекой Березина. Домик на дереве, лес, рыбалка, пляжный отдых.",
           "url": "https://example.com/",
           "image": "https://example.com/img/about_us.jpg",
-          "telephone": "+375291234567",
+          "telephone": "+375297759465",
           "priceRange": "$$",
           "address": {
             "@type": "PostalAddress",
+            "streetAddress": "улица Дачная, дом 32",
             "addressCountry": "BY",
             "addressRegion": "Могилёвская область",
             "addressLocality": "деревня Полянки, Бобруйский район"
           },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 53.123456,
-            "longitude": 29.123456
-          },
           "sameAs": [
-            "https://t.me/yourusername",
-            "https://www.instagram.com/yourprofile",
-            "https://vk.com/yourprofile"
+            "https://www.instagram.com/polyanki_holiday_resort",
+            "https://www.tiktok.com/@polyankibelarus",
+            "https://yandex.ru/maps/org/polyanki_dom_v_derevne/86234506796",
+            "https://maps.app.goo.gl/uCurSgUoCDbGt2eW7"
           ],
+          "hasMap": [
+            "https://yandex.ru/maps/org/polyanki_dom_v_derevne/86234506796",
+            "https://maps.app.goo.gl/uCurSgUoCDbGt2eW7"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+375297759465",
+            "contactType": "reservations",
+            "availableLanguage": ["ru", "be"]
+          },
           "openingHoursSpecification": [
             {
               "@type": "OpeningHoursSpecification",
@@ -660,26 +667,79 @@
 
     <!-- КОНТАКТЫ -->
     <section id="contacts" class="padding-top-60 padding-bottom-60 bg-gray">
-        <div class="row color_black-80">
-            <div class="description-block width-50">
+        <div class="contacts-container color_black-80">
+            <header class="contacts-intro">
                 <h2 class="font-carmo f-size-36">Контакты и бронирование</h2>
                 <p class="font-nunito margin-top-15 f-size-18">
-                    Напишите нам или позвоните, чтобы забронировать домик в Полянках
-                    и уточнить детали отдыха.
+                    Позвоните нам, загляните в социальные сети или постройте маршрут до домика.
+                    Будем рады ответить на вопросы и помочь выбрать даты для отдыха в Полянках.
                 </p>
-                <address class="font-nunito margin-top-15 f-size-18">
-                    Телефон:
-                    <a href="tel:+375XXXXXXXXX">+375 XX XXX-XX-XX</a><br>
-                    Telegram / Viber / WhatsApp:
-                    <a href="https://t.me/username" rel="nofollow">написать в мессенджер</a><br>
-                    Email:
-                    <a href="mailto:info@example.com">info@example.com</a><br>
-                    деревня Полянки, Бобруйский район, Могилёвская область, Беларусь
-                </address>
-            </div>
-            <div class="image-block width-50">
-                <!-- Сюда можно вставить карту или фото локации -->
-            </div>
+            </header>
+
+            <address class="contacts-grid font-nunito">
+                <a class="contact-card contact-card-primary" href="tel:+375297759465"
+                   aria-label="Позвонить в Полянки Holiday Resort по номеру +375 29 775-94-65">
+                    <span class="contact-icon" aria-hidden="true">☎</span>
+                    <span class="contact-content">
+                        <span class="contact-label">Телефон и бронирование</span>
+                        <strong>+375 29 775-94-65</strong>
+                        <span class="contact-action">Позвонить</span>
+                    </span>
+                </a>
+
+                <a class="contact-card" href="https://www.instagram.com/polyanki_holiday_resort?igsh=aDhxaHg4dTF2anN0"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Открыть Instagram Полянки Holiday Resort">
+                    <span class="contact-icon contact-icon-instagram" aria-hidden="true">◎</span>
+                    <span class="contact-content">
+                        <span class="contact-label">Instagram</span>
+                        <strong>@polyanki_holiday_resort</strong>
+                        <span class="contact-action">Фото и новости</span>
+                    </span>
+                </a>
+
+                <a class="contact-card" href="https://www.tiktok.com/@polyankibelarus?_r=1&amp;_t=ZS-991LmN1d6ph"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Открыть TikTok Полянки Holiday Resort">
+                    <span class="contact-icon" aria-hidden="true">♪</span>
+                    <span class="contact-content">
+                        <span class="contact-label">TikTok</span>
+                        <strong>@polyankibelarus</strong>
+                        <span class="contact-action">Смотреть видео</span>
+                    </span>
+                </a>
+
+                <div class="contact-card contact-location">
+                    <span class="contact-icon" aria-hidden="true">⌖</span>
+                    <span class="contact-content">
+                        <span class="contact-label">Адрес</span>
+                        <strong>Беларусь, Могилёвская область</strong>
+                        <span>Бобруйский район, деревня Полянки, улица Дачная, дом 32</span>
+                    </span>
+                </div>
+
+                <a class="contact-card map-card" href="https://yandex.ru/maps/org/polyanki_dom_v_derevne/86234506796?si=d3f0c3q2g93wuj3n7qph94t388"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Построить маршрут к Полянкам в Яндекс Картах">
+                    <span class="map-provider" aria-hidden="true">Я</span>
+                    <span class="contact-content">
+                        <span class="contact-label">Как добраться</span>
+                        <strong>Яндекс Карты</strong>
+                        <span class="contact-action">Открыть маршрут →</span>
+                    </span>
+                </a>
+
+                <a class="contact-card map-card" href="https://maps.app.goo.gl/uCurSgUoCDbGt2eW7?g_st=atm"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Построить маршрут к Полянкам в Google Картах">
+                    <span class="map-provider map-provider-google" aria-hidden="true">G</span>
+                    <span class="contact-content">
+                        <span class="contact-label">Как добраться</span>
+                        <strong>Google Карты</strong>
+                        <span class="contact-action">Открыть маршрут →</span>
+                    </span>
+                </a>
+            </address>
         </div>
     </section>
 </main>
@@ -694,7 +754,7 @@
         </div>
         <div class="width-40">
             <address class="font-nunito f-size-14">
-                деревня Полянки, Бобруйский район, Могилёвская область, Беларусь
+                Беларусь, Могилёвская область, Бобруйский район, деревня Полянки, улица Дачная, дом 32
             </address>
         </div>
     </div>

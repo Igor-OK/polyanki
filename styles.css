@@ -358,6 +358,89 @@ main {
 .activity-image.activity-board-games img {object-position: center 16%;}
 .activity-image.activity-pond-fishing img {object-position: center 68%;}
 
+/* Контакты */
+.contacts-container {
+    padding: 0 100px;
+}
+.contacts-intro {
+    max-width: 760px;
+    margin-bottom: 36px;
+    background: transparent;
+}
+.contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    font-style: normal;
+}
+.contact-card {
+    min-height: 112px;
+    padding: 22px 24px;
+    box-sizing: border-box;
+    border: 1px solid rgba(81, 81, 81, .12);
+    border-radius: 16px;
+    color: #515151;
+    background: rgba(255, 255, 255, .72);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+a.contact-card:hover,
+a.contact-card:focus-visible {
+    transform: translateY(-3px);
+    background: #fff;
+    box-shadow: 0 12px 30px rgba(55, 50, 40, .12);
+}
+.contact-card-primary {
+    color: #fff;
+    border-color: #68705a;
+    background: #68705a;
+}
+a.contact-card-primary:hover,
+a.contact-card-primary:focus-visible {
+    color: #fff;
+    background: #59614c;
+}
+.contact-icon,
+.map-provider {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    border-radius: 50%;
+    color: #fff;
+    background: #a84f49;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+}
+.contact-card-primary .contact-icon { color: #59614c; background: #fff; }
+.contact-icon-instagram { background: #9d4f79; }
+.map-provider { background: #df4545; }
+.map-provider-google { background: #4285f4; }
+.contact-content {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.contact-content strong {
+    font-size: 19px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+.contact-label,
+.contact-action {
+    font-size: 14px;
+    opacity: .72;
+}
+.contact-action { margin-top: 3px; }
+.contact-location { background: rgba(250, 250, 250, .65); }
+
 
 
 
@@ -640,8 +723,13 @@ main {
     .days .day { height: 40px; font-size: 14px; border-radius: 7px; }
     .calendar-legend { gap: 12px; justify-content: center; flex-wrap: wrap; font-size: 12px; }
     .calendar-day-details { flex-direction: column; gap: 4px; font-size: 13px; line-height: 1.45; }
-    #recipe .description-block, #contacts .description-block { padding: 8px 24px 0; }
-    #contacts address { line-height: 1.8; overflow-wrap: anywhere; }
+    #recipe .description-block { padding: 8px 24px 0; }
+    .contacts-container { padding: 0 24px; }
+    .contacts-intro { margin-bottom: 26px; }
+    .contacts-grid { grid-template-columns: 1fr; gap: 12px; }
+    .contact-card { min-height: 98px; padding: 18px; gap: 15px; }
+    .contact-icon, .map-provider { width: 44px; height: 44px; flex-basis: 44px; font-size: 21px; }
+    .contact-content strong { font-size: 17px; }
     footer .row { padding: 28px 24px; gap: 14px; }
     footer address { font-style: normal; }
 }

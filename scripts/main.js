@@ -17,14 +17,9 @@ class Navigation {
         this.deploySectionBottomGap = this.deployNavItem.offsetTop;
         this.activitiesSectionBottomGap  = this.activitiesNavItem.offsetTop;
 
-        // console.log(this.aboutUsSectionBottomGap, this.deploySectionBottomGap, this.activitiesSectionBottomGap)
-
-
         this.oldScroll = 0;
         this.scrollY = 0;
         this.delta = 110; //px for scroll reacting
-
-        this.gapFromTop = 200; //for switching between menu items
 
         this.addEventListeners()
 
@@ -45,10 +40,6 @@ class Navigation {
         if (this.scrollY > this.aboutUsSectionBottomGap -200) this.navigationContainer.classList.add('scrolled');
         if (this.scrollY <= this.aboutUsSectionBottomGap) this.navigationContainer.classList.remove('scrolled');
 
-
-        if (window.scrollY > this.aboutUsSectionBottomGap - this.gapFromTop && window.scrollY < this.deploySectionBottomGap - this.gapFromTop) console.log('about us');
-        if (window.scrollY > this.deploySectionBottomGap - this.gapFromTop && window.scrollY < this.activitiesSectionBottomGap - this.gapFromTop) console.log('deploy');
-        if (window.scrollY > this.activitiesSectionBottomGap - this.gapFromTop) console.log('activities');
 
         this.oldScroll = this.scrollY;
     }

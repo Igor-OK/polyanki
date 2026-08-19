@@ -138,9 +138,7 @@
       calendarEl.dataset.updatedAt = payload.updatedAt || "";
       calendarEl.dataset.timezone = payload.timezone || TIMEZONE;
       saveEventsToCache(payload);
-    } catch (error) {
-      console.error("Не удалось обновить календарь:", error);
-
+    } catch {
       const cachedEvents = readEventsFromCache();
       calendarEvents = cachedEvents.length ? cachedEvents : normalizeEvents(createDemoEvents());
       showSystemMessage(
@@ -330,9 +328,7 @@
   function saveEventsToCache(payload) {
     try {
       localStorage.setItem("polyanki-calendar-cache", JSON.stringify(payload));
-    } catch (error) {
-      console.warn("Не удалось сохранить кэш календаря:", error);
-    }
+    } catch {}
   }
 
   function readEventsFromCache() {
@@ -341,8 +337,7 @@
       if (!raw) return [];
       const payload = JSON.parse(raw);
       return Array.isArray(payload.events) ? normalizeEvents(payload.events) : [];
-    } catch (error) {
-      console.warn("Не удалось прочитать кэш календаря:", error);
+    } catch {
       return [];
     }
   }

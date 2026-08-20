@@ -70,6 +70,8 @@ class GallerySeo {
         this.galleryItems = [];
         this.galleryPoints = [];
         this.galleryControls = null;
+        this.touchStartX = null;
+        this.touchStartY = null;
 
         this.init();
 
@@ -78,8 +80,6 @@ class GallerySeo {
             this.timer = setInterval(this.nextSlide, this.delay);
         }
     }
-
-//todo handle swipe;
 
     init = () => {
 
@@ -115,6 +115,43 @@ class GallerySeo {
         });
 
         this.zIndex = this.slidesArray.length;
+
+        // На мобильных устройствах разрешаем переключать слайды горизонтальным свайпом.
+        this.container.addEventListener('touchstart', this.touchStartHandler, { passive: true });
+        this.container.addEventListener('touchend', this.touchEndHandler, { passive: true });
+        this.container.addEventListener('touchcancel', this.resetTouchPosition, { passive: true });
+    };
+
+    touchStartHandler = event => {
+        if (!window.matchMedia('(max-width: 767px)').matches || event.touches.length !== 1) return;
+
+        this.touchStartX = event.touches[0].clientX;
+        this.touchStartY = event.touches[0].clientY;
+    };
+
+    touchEndHandler = event => {
+        if (!window.matchMedia('(max-width: 767px)').matches || this.touchStartX === null) return;
+
+        const touch = event.changedTouches[0];
+        const horizontalDistance = touch.clientX - this.touchStartX;
+        const verticalDistance = touch.clientY - this.touchStartY;
+
+        this.resetTouchPosition();
+
+        /*
+         * Короткое движение или преимущественно вертикальный жест считаем прокруткой страницы,
+         * а не попыткой перелистнуть галерею.
+         */
+        if (Math.abs(horizontalDistance) < 50 || Math.abs(horizontalDistance) <= Math.abs(verticalDistance)) return;
+
+        const direction = horizontalDistance < 0 ? 1 : -1;
+        const nextIndex = (this.currentTopSlideIndex + direction + this.galleryLength) % this.galleryLength;
+        this.setCustomSlide(nextIndex);
+    };
+
+    resetTouchPosition = () => {
+        this.touchStartX = null;
+        this.touchStartY = null;
     };
 
     nextSlide = () => {

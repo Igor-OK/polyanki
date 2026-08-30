@@ -60,7 +60,23 @@
           "url": "https://example.com/",
           "image": "https://example.com/img/about_us.jpg",
           "telephone": "+375297759465",
-          "priceRange": "$$",
+          "priceRange": "350–550 BYN",
+          "makesOffer": [
+            {
+              "@type": "Offer",
+              "name": "Проживание с понедельника по пятницу",
+              "price": "550",
+              "priceCurrency": "BYN",
+              "description": "Проживание 4–5 суток для компании до 5 человек: от 110 BYN в сутки и от 22 BYN с человека в сутки. Заезд в понедельник, выезд в пятницу до 15:00. Доплата за каждого дополнительного гостя — 70 BYN."
+            },
+            {
+              "@type": "Offer",
+              "name": "Проживание с пятницы по воскресенье",
+              "price": "350",
+              "priceCurrency": "BYN",
+              "description": "Проживание 2 суток для компании до 5 человек: 175 BYN в сутки и 35 BYN с человека в сутки. Заезд вечером в пятницу, выезд в воскресенье до конца дня. Доплата за каждого дополнительного гостя — 70 BYN."
+            }
+          ],
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "улица Дачная, дом 32",
@@ -119,8 +135,46 @@
           ]
         }
         </script>
+    <!-- Счётчик Яндекс Метрики -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {
+                if (document.scripts[j].src === r) { return; }
+            }
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=112089639', 'ym');
+
+        ym(112089639, 'init', {
+            ssr: true,
+            webvisor: true,
+            clickmap: true,
+            ecommerce: "dataLayer",
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce: true,
+            trackLinks: true
+        });
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B0WZ7JJFLY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-B0WZ7JJFLY');
+    </script>
 </head>
 <body>
+    <noscript>
+        <div>
+            <img src="https://mc.yandex.ru/watch/112089639"
+                 style="position: absolute; left: -9999px;"
+                 alt="">
+        </div>
+    </noscript>
 <header>
     <nav id="navigation_container" aria-label="Основная навигация">
         <div class="logo">
@@ -146,7 +200,7 @@
                 <a href="#activities">ДОСУГ</a>
             </li>
             <li class="js_navigation_item nav_item" data-item="prices">
-                <a href="#prices">КАЛЕНДАРЬ И ЦЕНЫ</a>
+                <a href="#prices">ЦЕНЫ</a>
             </li>
             <li class="js_navigation_item nav_item" data-item="recipe">
                 <a href="#recipe">РЕЦЕПТ ОТДЫХА</a>
@@ -404,7 +458,7 @@
                 </figure>
 
                 <figure class="js_gallery_card gallery-cover-seo fade-in-block">
-                    <img src="./img/tree-house-2.webp"
+                    <img src="./img/tree-house-interior.webp"
                          alt="Домик на дереве с двумя спальными местами в Полянках">
                     <figcaption class="gallery-slide-description-seo">
                         <h3 class="font-carmo f-size-30">Игры, отдых и красивый вид</h3>
@@ -680,73 +734,167 @@
         </article>
     </section>
 
-    <!-- КАЛЕНДАРЬ И ЦЕНЫ -->
+    <!-- ЦЕНЫ -->
     <section id="prices" class="padding-top-60 padding-bottom-60 bg-white-gray">
-        <div class="container">
-            <h2 class="font-carmo f-size-36 padding-bottom-30">
-                Календарь занятости и цены
-            </h2>
-            <p class="font-nunito margin-top-15 f-size-18">
-                Выберите удобные даты для аренды домика в Полянках. В календаре ниже отображается
-                доступность и базовая стоимость. Для уточнения цены на конкретные даты и
-                детали бронирования свяжитесь с нами удобным способом.
-            </p>
+        <div class="pricing-container color_black-80">
+            <div class="pricing-intro">
+                <h2 class="font-carmo f-size-36">Цены на проживание</h2>
+                <p class="font-nunito margin-top-15 f-size-18">
+                    Выберите удобный формат отдыха: спокойные будни в деревне или насыщенные выходные.
+                    Всё необходимое для комфортного проживания уже включено в стоимость.
+                </p>
+            </div>
 
-            <div class="calendar" aria-label="Календарь занятости домика">
-                <div class="header">
-                    <div class="month">January 2024</div>
-                    <div class="btns">
-                        <button class="btn today-btn" type="button" aria-label="Сегодня">
-                            <span aria-hidden="true">↺</span>
-                        </button>
-                        <button class="btn prev-btn" type="button" aria-label="Предыдущий месяц">
-                            &lt;
-                        </button>
-                        <button class="btn next-btn" type="button" aria-label="Следующий месяц">
-                            &gt;
-                        </button>
+            <div class="pricing-grid">
+                <article class="price-card price-card-weekdays">
+                    <div class="price-card-top">
+                        <span class="price-badge font-nunito">Будние дни</span>
+                        <h3 class="font-carmo">С понедельника по пятницу</h3>
                     </div>
+                    <div class="price-value font-carmo">
+                        <strong>550</strong>
+                        <span>BYN</span>
+                    </div>
+                    <p class="price-for font-nunito">за весь период · до 5 человек</p>
+                    <div class="price-breakdown font-nunito" aria-label="Расчёт стоимости буднего тарифа">
+                        <span><strong>4–5</strong> суток</span>
+                        <span><strong>от 110</strong> рублей в сутки</span>
+                        <span><strong>от 22</strong> рублей с человека в сутки</span>
+                    </div>
+                    <ul class="price-details font-nunito">
+                        <li>Заезд — утром в понедельник</li>
+                        <li>По договорённости иногда можно приехать вечером в воскресенье</li>
+                        <li>Выезд — в пятницу до 15:00</li>
+                    </ul>
+                </article>
+
+                <article class="price-card price-card-weekend">
+                    <div class="price-card-top">
+                        <span class="price-badge font-nunito">Выходные</span>
+                        <h3 class="font-carmo">С вечера пятницы по воскресенье</h3>
+                    </div>
+                    <div class="price-value font-carmo">
+                        <strong>350</strong>
+                        <span>BYN</span>
+                    </div>
+                    <p class="price-for font-nunito">за весь период · до 5 человек</p>
+                    <div class="price-breakdown font-nunito" aria-label="Расчёт стоимости тарифа выходного дня">
+                        <span><strong>2</strong> суток</span>
+                        <span><strong>175</strong> рублей в сутки</span>
+                        <span><strong>35</strong> рублей с человека в сутки</span>
+                    </div>
+                    <ul class="price-details font-nunito">
+                        <li>Заезд — вечером в пятницу</li>
+                        <li>Выезд — в воскресенье до конца дня</li>
+                        <li>Прекрасный вариант для короткой перезагрузки</li>
+                    </ul>
+                </article>
+            </div>
+
+            <div class="price-included font-nunito">
+                <span class="price-included-icon" aria-hidden="true">✓</span>
+                <p>
+                    <strong>Всё необходимое включено.</strong>
+                    Дом, спальные места, бельё, посуда и доступные развлечения входят в указанную стоимость.
+                    За каждого дополнительного гостя свыше 5 человек доплата составляет 70 рублей.
+                </p>
+            </div>
+
+            <div class="pricing-contact font-nunito">
+                <div>
+                    <h3 class="font-carmo">Уточните свободные даты</h3>
+                    <p>Позвоните нам или напишите через удобный мессенджер или аккаунт в социальных сетях.</p>
                 </div>
-                <div class="weekdays" aria-hidden="true">
-                    <div class="day">Вс</div>
-                    <div class="day">Пн</div>
-                    <div class="day">Вт</div>
-                    <div class="day">Ср</div>
-                    <div class="day">Чт</div>
-                    <div class="day">Пт</div>
-                    <div class="day">Сб</div>
-                </div>
-                <div class="days">
-                    <!-- Дни добавляются через JS -->
-                </div>
-                <div class="calendar-legend font-nunito" aria-label="Обозначения календаря">
-                    <span><i class="legend-dot free-dot"></i>Свободно</span>
-                    <span><i class="legend-dot occupied-dot"></i>Занято</span>
-                    <span><i class="legend-dot turnover-dot"></i>Смена гостей</span>
-                    <span><i class="legend-dot checkout-dot"></i>Свободно после выезда</span>
-                    <span><i class="legend-dot checkin-dot"></i>Свободно до заезда</span>
-                </div>
-                <div class="calendar-day-details font-nunito" aria-live="polite">
-                    Нажмите на дату, чтобы увидеть её состояние.
+                <div class="pricing-actions">
+                    <a class="pricing-button pricing-button-primary" href="tel:+375297759465">Позвонить</a>
+                    <a class="pricing-button" href="#contacts">Все контакты</a>
                 </div>
             </div>
+
+            <p class="pricing-note font-nunito">
+                * На новогодние праздники стоимость проживания согласовывается индивидуально.
+            </p>
         </div>
     </section>
 
     <!-- РЕЦЕПТ ОТДЫХА -->
     <section id="recipe" class="padding-top-60 padding-bottom-60">
-        <div class="row color_black-80">
-            <div class="description-block width-60">
+        <div class="recipe-container color_black-80">
+            <div class="recipe-intro">
                 <h2 class="font-carmo f-size-36">Рецепт идеального отдыха в Полянках</h2>
                 <p class="font-nunito margin-top-15 f-size-18">
-                    Утром — прогулка по лесу и завтрак на веранде с видом на природу.
-                    Днём — пляжный отдых на Белом Береге или рыбалка на Березине.
-                    Вечером — ужин у печки, настольные игры и звёздное небо над домиком на дереве.
+                    Здесь не существует единственно правильного сценария. Полянки одинаково хорошо подходят
+                    для семейного приключения, встречи поколений, романтической поездки и отдыха большой дружной компанией.
                 </p>
-                <p class="font-nunito margin-top-15 f-size-18">
-                    Добавьте сюда тишину, семейные разговоры и отсутствие городской суеты —
-                    получается простой, но очень рабочий рецепт перезагрузки.
-                </p>
+            </div>
+
+            <div class="recipe-grid">
+                <article class="recipe-card">
+                    <div class="recipe-card-heading">
+                        <span class="recipe-number font-carmo" aria-hidden="true">01</span>
+                        <div>
+                            <span class="recipe-audience font-nunito">Одна семья</span>
+                            <h3 class="font-carmo">Классический семейный отдых</h3>
+                        </div>
+                    </div>
+                    <p class="font-nunito">
+                        Пока дети осваивают домик на дереве, горку, троллей и другие развлечения, родители могут
+                        спокойно выдохнуть — без бесконечного «Мам, мне скучно». На территории всегда найдётся занятие,
+                        а периметр участка можно закрыть, чтобы дети не разбегались и оставались рядом. Взрослым остаётся
+                        отдыхать, набираться сил и проводить время вместе, не придумывая новую программу каждые полчаса.
+                    </p>
+                </article>
+
+                <article class="recipe-card recipe-card-accent">
+                    <div class="recipe-card-heading">
+                        <span class="recipe-number font-carmo" aria-hidden="true">02</span>
+                        <div>
+                            <span class="recipe-audience font-nunito">Три поколения</span>
+                            <h3 class="font-carmo">Бабушки, дедушки, родители и внуки</h3>
+                        </div>
+                    </div>
+                    <p class="font-nunito">
+                        Редкая возможность собрать близких не за праздничным столом на пару часов, а пожить рядом
+                        несколько настоящих дней. Здесь легко поймать тот самый вайб лета у бабушки в деревне: босиком
+                        по траве, с прогулками, ягодами, рыбалкой и долгими вечерами за общим столом. Родители смогут
+                        показать детям, каким было их собственное детство, а бабушки и дедушки — разделить с внуками
+                        простые радости, из которых и складываются самые тёплые семейные воспоминания.
+                    </p>
+                </article>
+
+                <article class="recipe-card recipe-card-romantic">
+                    <div class="recipe-card-heading">
+                        <span class="recipe-number font-carmo" aria-hidden="true">03</span>
+                        <div>
+                            <span class="recipe-audience font-nunito">Для двоих</span>
+                            <h3 class="font-carmo">Романтическая перезагрузка</h3>
+                        </div>
+                    </div>
+                    <p class="font-nunito">
+                        Медленный завтрак на веранде, прогулка по лесу без маршрута, закат у воды и огонь в заглублённом патио.
+                        Здесь легко выключить телефоны, забыть о расписании и снова побыть вдвоём. А ночью — тишина,
+                        звёздное небо и ощущение, будто весь этот уголок природы существует только для вас. И если не хочется
+                        оставлять домашнего любимца дома, при ответственном подходе и предварительном согласовании можно
+                        приехать отдыхать вместе с ним.
+                    </p>
+                </article>
+
+                <article class="recipe-card">
+                    <div class="recipe-card-heading">
+                        <span class="recipe-number font-carmo" aria-hidden="true">04</span>
+                        <div>
+                            <span class="recipe-audience font-nunito">Две семьи с детьми</span>
+                            <h3 class="font-carmo">Большая дружная компания</h3>
+                        </div>
+                    </div>
+                    <p class="font-nunito">
+                        Детям веселее исследовать участок и придумывать игры вместе, а взрослым — делить хлопоты
+                        и отдыхать в хорошей компании. Обязательный летний пункт программы — удивительный пляж с белым
+                        песком всего в 3,5 километра от дома: там можно купаться, провести у воды целый день и поймать
+                        настоящее курортное настроение. А после — приготовить большой ужин на огне, устроить игры
+                        или турнир и завершить насыщенный день душевными посиделками.
+                    </p>
+                </article>
             </div>
         </div>
     </section>
@@ -847,7 +995,6 @@
 </footer>
 
 <script src="./scripts/main.js" defer></script>
-<script src="./scripts/calendar.js" defer></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const yearSpan = document.getElementById('currentYear');

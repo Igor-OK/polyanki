@@ -27,8 +27,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <!-- Canonical: замени URL на свой домен -->
-    <link rel="canonical" href="https://example.com/">
+    <!-- Канонический адрес страницы -->
+    <link rel="canonical" href="https://polyanki.by/">
+
+    <!-- Основное SEO-изображение страницы -->
+    <link rel="image_src" href="https://polyanki.by/img/about_us_3.webp">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -36,8 +39,12 @@
           content="Полянки Holiday Resort — домик для семейного отдыха в Беларуси">
     <meta property="og:description"
           content="Уютный домик в деревне Полянки возле пляжа Белый Берег. Семейный отдых, лес, река Березина, рыбалка, домик на дереве.">
-    <meta property="og:url" content="https://example.com/">
-    <meta property="og:image" content="https://example.com/img/og-main.jpg">
+    <meta property="og:url" content="https://polyanki.by/">
+    <meta property="og:image" content="https://polyanki.by/img/about_us_3.webp">
+    <meta property="og:image:type" content="image/webp">
+    <meta property="og:image:width" content="645">
+    <meta property="og:image:height" content="450">
+    <meta property="og:image:alt" content="Дом для отдыха Полянки Holiday Resort в белорусской деревне">
     <meta property="og:locale" content="ru_RU">
 
     <!-- Twitter Card -->
@@ -46,7 +53,8 @@
           content="Полянки Holiday Resort — домик для семейного отдыха">
     <meta name="twitter:description"
           content="Аренда домика в деревне Полянки, Бобруйский район, Беларусь. Рядом пляж Белый Берег, лес, река Березина.">
-    <meta name="twitter:image" content="https://example.com/img/og-main.jpg">
+    <meta name="twitter:image" content="https://polyanki.by/img/about_us_3.webp">
+    <meta name="twitter:image:alt" content="Дом для отдыха Полянки Holiday Resort в белорусской деревне">
 
     <link rel="stylesheet" href="styles.css">
 
@@ -57,24 +65,37 @@
           "@type": ["TouristAccommodation", "LocalBusiness"],
           "name": "Полянки Holiday Resort",
           "description": "Аренда домика в деревне Полянки для семейного отдыха рядом с пляжем Белый Берег и рекой Березина. Домик на дереве, лес, рыбалка, пляжный отдых.",
-          "url": "https://example.com/",
-          "image": "https://example.com/img/about_us.jpg",
+          "url": "https://polyanki.by/",
+          "image": "https://polyanki.by/img/about_us_3.webp",
           "telephone": "+375297759465",
-          "priceRange": "350–550 BYN",
+          "priceRange": "от 110 BYN за сутки; пакеты 350–550 BYN",
           "makesOffer": [
             {
               "@type": "Offer",
               "name": "Проживание с понедельника по пятницу",
               "price": "550",
               "priceCurrency": "BYN",
-              "description": "Проживание 4–5 суток для компании до 5 человек: от 110 BYN в сутки и от 22 BYN с человека в сутки. Заезд в понедельник, выезд в пятницу до 15:00. Доплата за каждого дополнительного гостя — 70 BYN."
+              "url": "https://polyanki.by/#prices",
+              "eligibleDuration": {
+                "@type": "QuantitativeValue",
+                "minValue": 4,
+                "maxValue": 5,
+                "unitCode": "DAY"
+              },
+              "description": "Полная стоимость пакета — 550 BYN для компании до 5 человек. Продолжительность — 4–5 суток. Расчётная стоимость — от 110 BYN за сутки и от 22 BYN с человека в сутки. Отдельные сутки не бронируются. Заезд в понедельник, выезд в пятницу до 15:00. Доплата за каждого дополнительного гостя — 70 BYN."
             },
             {
               "@type": "Offer",
               "name": "Проживание с пятницы по воскресенье",
               "price": "350",
               "priceCurrency": "BYN",
-              "description": "Проживание 2 суток для компании до 5 человек: 175 BYN в сутки и 35 BYN с человека в сутки. Заезд вечером в пятницу, выезд в воскресенье до конца дня. Доплата за каждого дополнительного гостя — 70 BYN."
+              "url": "https://polyanki.by/#prices",
+              "eligibleDuration": {
+                "@type": "QuantitativeValue",
+                "value": 2,
+                "unitCode": "DAY"
+              },
+              "description": "Полная стоимость пакета — 350 BYN для компании до 5 человек. Продолжительность — 2 суток. Расчётная стоимость — 175 BYN за сутки и 35 BYN с человека в сутки. Отдельные сутки не бронируются. Заезд вечером в пятницу, выезд в воскресенье до конца дня. Доплата за каждого дополнительного гостя — 70 BYN."
             }
           ],
           "address": {
@@ -871,11 +892,12 @@
                         </div>
                     </div>
                     <p class="font-nunito">
-                        Медленный завтрак на веранде, прогулка по лесу без маршрута, закат у воды и огонь в заглублённом патио.
-                        Здесь легко выключить телефоны, забыть о расписании и снова побыть вдвоём. А ночью — тишина,
-                        звёздное небо и ощущение, будто весь этот уголок природы существует только для вас. И если не хочется
-                        оставлять домашнего любимца дома, при ответственном подходе и предварительном согласовании можно
-                        приехать отдыхать вместе с ним.
+                        Можно отправиться на рыбалку, сходить за грибами и ягодами или прогуляться до Белого Берега:
+                        дорога к нему проходит через красивые места, а сам пляж по-настоящему впечатляет. Вечером — огонь
+                        в заглублённом патио, любимый сериал и время, чтобы снова почувствовать близость и побыть только вдвоём.
+                        Хорошие спальные места, блэкаут-шторы и комфортный микроклимат помогают отлично выспаться и полностью
+                        перезагрузиться. А если не хочется оставлять питомца дома, при ответственном подходе и предварительном
+                        согласовании можно приехать вместе с ним.
                     </p>
                 </article>
 

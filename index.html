@@ -62,18 +62,25 @@
     <script type="application/ld+json">
         {
           "@context": "https://schema.org",
-          "@type": ["TouristAccommodation", "LocalBusiness"],
+          "@type": ["LodgingBusiness", "TouristAccommodation"],
           "name": "Полянки Holiday Resort",
           "description": "Аренда домика в деревне Полянки для семейного отдыха рядом с пляжем Белый Берег и рекой Березина. Домик на дереве, лес, рыбалка, пляжный отдых.",
           "url": "https://polyanki.by/",
           "image": "https://polyanki.by/img/about_us_3.webp",
           "telephone": "+375297759465",
-          "priceRange": "от 110 BYN за сутки; пакеты 350–550 BYN",
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 52.9472994,
+            "longitude": 29.4028038
+          },
+          "numberOfRooms": 2,
+          "petsAllowed": true,
+          "priceRange": "от 120 BYN за сутки; пакеты 400–600 BYN",
           "makesOffer": [
             {
               "@type": "Offer",
-              "name": "Проживание с понедельника по пятницу",
-              "price": "550",
+              "name": "Пакет «Будние дни»: с понедельника по пятницу",
+              "price": "600",
               "priceCurrency": "BYN",
               "url": "https://polyanki.by/#prices",
               "eligibleDuration": {
@@ -82,12 +89,12 @@
                 "maxValue": 5,
                 "unitCode": "DAY"
               },
-              "description": "Полная стоимость пакета — 550 BYN для компании до 5 человек. Продолжительность — 4–5 суток. Расчётная стоимость — от 110 BYN за сутки и от 22 BYN с человека в сутки. Отдельные сутки не бронируются. Заезд в понедельник, выезд в пятницу до 15:00. Доплата за каждого дополнительного гостя — 70 BYN."
+              "description": "Полная стоимость пакета — 600 BYN для компании до 5 человек. Продолжительность — 4–5 суток. Расчётная стоимость — от 120 BYN за сутки и от 25 BYN с человека в сутки. Отдельные сутки не бронируются. Заезд в понедельник, выезд в пятницу до 15:00. Доплата за каждого дополнительного гостя — 70 BYN."
             },
             {
               "@type": "Offer",
-              "name": "Проживание с пятницы по воскресенье",
-              "price": "350",
+              "name": "Пакет «Выходные»: с пятницы по воскресенье",
+              "price": "400",
               "priceCurrency": "BYN",
               "url": "https://polyanki.by/#prices",
               "eligibleDuration": {
@@ -95,7 +102,7 @@
                 "value": 2,
                 "unitCode": "DAY"
               },
-              "description": "Полная стоимость пакета — 350 BYN для компании до 5 человек. Продолжительность — 2 суток. Расчётная стоимость — 175 BYN за сутки и 35 BYN с человека в сутки. Отдельные сутки не бронируются. Заезд вечером в пятницу, выезд в воскресенье до конца дня. Доплата за каждого дополнительного гостя — 70 BYN."
+              "description": "Полная стоимость пакета — 400 BYN для компании до 5 человек. Продолжительность — 2 суток. Расчётная стоимость — 200 BYN за сутки и от 40 BYN с человека в сутки. Отдельные сутки не бронируются. Заезд вечером в пятницу, выезд в воскресенье до конца дня. Доплата за каждого дополнительного гостя — 70 BYN."
             }
           ],
           "address": {
@@ -140,18 +147,140 @@
           "amenityFeature": [
             {
               "@type": "LocationFeatureSpecification",
-              "name": "Пляж Белый Берег",
-              "value": "3.5 км"
+              "name": "wifi",
+              "value": true,
+              "description": "В доме доступен Wi‑Fi."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "internetType",
+              "value": "Free"
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "beachAccess",
+              "value": true,
+              "description": "Общественный пляж Белый Берег на реке Березине находится примерно в 3,5 км от дома. Белый песок, широкая река и лес по берегам создают необычный для Беларуси пейзаж."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "childFriendly",
+              "value": true,
+              "description": "Дом и территория подходят для семейного отдыха с детьми. Периметр основной территории можно закрыть."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "crib",
+              "value": true,
+              "description": "Предоставляется детская кроватка-манеж."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "heating",
+              "value": true,
+              "description": "В доме поддерживается комфортный микроклимат для сна и отдыха."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "kitchen",
+              "value": true,
+              "description": "Оборудованная кухня с видом и необходимой утварью для приготовления еды."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "ovenStove",
+              "value": true,
+              "description": "В доме есть оборудование для приготовления пищи и полностью действующая русская печь."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "outdoorGrill",
+              "value": true,
+              "description": "Предоставляется всё необходимое для шашлыка, гриля и приготовления еды на открытом огне."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "patio",
+              "value": true,
+              "description": "Заглублённое патио защищает от ветра и создаёт атмосферное место для вечерних посиделок у костра."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "petsAllowed",
+              "value": true,
+              "description": "Приезд с воспитанными домашними животными возможен при ответственном отношении и по предварительному согласованию."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "tv",
+              "value": true,
+              "description": "В доме есть телевизор, DVD-проигрыватель и большая коллекция фильмов, мультфильмов и сериалов."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "Приватная аренда дома и территории",
+              "value": true,
+              "description": "Дом и территория сдаются целиком только одной семье или компании, без других гостей и общих зон с посторонними."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "Вместимость",
+              "value": "до 10 гостей и 10 спальных мест",
+              "description": "Удобные матрасы, мягкие кровати и плотные блэкаут-шторы помогают хорошо выспаться, в том числе днём."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "Оснащение для маленьких детей",
+              "value": true,
+              "description": "Детский стульчик, видеоняня, термоковрик, игрушки, песочница, горка, беговел, тарзанка и троллей."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "Семейные и спортивные развлечения",
+              "value": true,
+              "description": "Настольный теннис, бадминтон, баскетбольное кольцо, спортивный инвентарь и большая коллекция настольных игр."
             },
             {
               "@type": "LocationFeatureSpecification",
               "name": "Домик на дереве",
-              "value": "2 спальных места"
+              "value": true,
+              "description": "Место из детских мечтаний для игр, посиделок и приключений. Рядом находятся горка и троллей, а при желании в домике можно переночевать."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "Русская печь",
+              "value": true,
+              "description": "Полностью действующая русская печь и необходимая утварь позволяют не только согреться у огня, но и попробовать приготовить в ней еду."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "Пруд с рыбалкой",
+              "value": true,
+              "description": "Собственный пруд расположен на участке сразу за ограждением основной территории. В нём можно ловить небольших карасиков."
             },
             {
               "@type": "LocationFeatureSpecification",
               "name": "Рыбалка на Березине",
-              "value": "сом, судак, щука и др."
+              "value": true,
+              "description": "В Березине водятся сом, окунь, судак, плотва, лещ, щука, краснопёрка и белый амур."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "Ретро-игры",
+              "value": true,
+              "description": "Ретро-приставка с коллекцией классических 8- и 16-битных игр для детей и взрослых."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "Горячая вода и удобства внутри дома",
+              "value": true,
+              "description": "Душ и туалет находятся внутри дома, есть горячая вода, которая поступает из собственной скважины."
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "Лес, грибы и ягоды",
+              "value": true,
+              "description": "Деревню окружают живописные леса для прогулок, фотоохоты и сезонного сбора грибов и ягод."
             }
           ]
         }
@@ -262,7 +391,7 @@
                     Среди красивых, вековых лесов, вдали от городов и оживленных трасс, рядом с величественной и неторопливой Березиной в Бобруйском районе находится деревня Полянки.
                 </p>
                 <p class="font-nunito margin-top-15 f-size-18">
-                    Это место придется по вкусу всем любителям пляжного отдыха, тк рядом (3.5 км) находится один из прекраснейших лесных пляжей в Беларуси – Белый Берег (он же Белогорье).
+                    Это место придётся по вкусу всем любителям пляжного отдыха, так как рядом, всего в 3,5 км, находится один из прекраснейших лесных пляжей в Беларуси — Белый Берег (он же Белогорье).
                 </p>
             </div>
     
@@ -298,13 +427,123 @@
                     <figcaption class="gallery-slide-description-seo">
                         <h3 class="font-carmo f-size-30">Особая атмосфера.</h3>
                         <p class="font-nunito f-size-16">
-                            Пень и птиц, звуки леса, потрескивание костра, немного праздничной иллюминации, - вот и готовы декорации для незабываемого отдыха.
+                            Пение птиц, звуки леса, потрескивание костра, немного праздничной иллюминации — и вот готовы декорации для незабываемого отдыха.
                         </p>
                     </figcaption>
                 </figure>
     
             </div>
         </div>
+
+        <!-- Краткие факты помогают людям и поисковым системам быстро понять суть предложения. -->
+        <section class="about-highlights color_black-80" aria-labelledby="about-highlights-title">
+            <header class="about-highlights-intro">
+                <span class="about-highlights-kicker font-nunito">Главное об отдыхе в Полянках</span>
+                <h2 id="about-highlights-title" class="font-carmo f-size-36">Дом, природа и развлечения — всё в одном месте</h2>
+                <p class="font-nunito f-size-18">
+                    Отдельный деревенский дом для семьи или компании, где можно выспаться, провести дни на природе
+                    и найти занятие для гостей любого возраста.
+                </p>
+            </header>
+
+            <ul class="about-highlights-grid">
+                <li class="about-highlight">
+                    <span class="about-highlight-number font-carmo" aria-hidden="true">01</span>
+                    <div>
+                        <h3 class="font-carmo">Белый Берег на Березине — примерно в 3,5 км</h3>
+                        <p class="font-nunito">Это не просто ближайший пляж, а одно из самых красивых мест в окрестностях. Белый песок, широкая река и лес по берегам создают пейзаж, необычный даже для Беларуси.</p>
+                    </div>
+                </li>
+
+                <li class="about-highlight">
+                    <span class="about-highlight-number font-carmo" aria-hidden="true">02</span>
+                    <div>
+                        <h3 class="font-carmo">Дом и территория — только для вас</h3>
+                        <p class="font-nunito">Дом сдаётся целиком одной семье или компании. Здесь не будет других гостей, а пространство не придётся делить с посторонними.</p>
+                    </div>
+                </li>
+
+                <li class="about-highlight">
+                    <span class="about-highlight-number font-carmo" aria-hidden="true">03</span>
+                    <div>
+                        <h3 class="font-carmo">До 10 гостей и 10 спальных мест</h3>
+                        <p class="font-nunito">Удобные матрасы, мягкие кровати, плотные блэкаут-шторы и комфортный микроклимат помогают спокойно выспаться и полноценно отдохнуть — даже днём.</p>
+                    </div>
+                </li>
+
+                <li class="about-highlight">
+                    <span class="about-highlight-number font-carmo" aria-hidden="true">04</span>
+                    <div>
+                        <h3 class="font-carmo">Всё для отдыха с маленькими детьми</h3>
+                        <p class="font-nunito">Есть кроватка-манеж, детский стульчик, видеоняня, термоковрик, игрушки, песочница, горка, беговел, тарзанка и троллей.</p>
+                    </div>
+                </li>
+
+                <li class="about-highlight">
+                    <span class="about-highlight-number font-carmo" aria-hidden="true">05</span>
+                    <div>
+                        <h3 class="font-carmo">Есть чем заняться всей семье</h3>
+                        <p class="font-nunito">Настольный теннис, бадминтон, баскетбольное кольцо, спортивный инвентарь и большая коллекция настольных игр не дадут заскучать ни детям, ни взрослым. А Wi‑Fi поможет оставаться на связи и пользоваться привычными онлайн-сервисами.</p>
+                    </div>
+                </li>
+
+                <li class="about-highlight">
+                    <span class="about-highlight-number font-carmo" aria-hidden="true">06</span>
+                    <div>
+                        <h3 class="font-carmo">Домик на дереве — отдельное приключение</h3>
+                        <p class="font-nunito">Любимое место детей и уютный уголок среди зелени для игр, посиделок и собственных приключений. Рядом находятся горка и троллей, а при желании в домике можно даже переночевать.</p>
+                    </div>
+                </li>
+
+                <li class="about-highlight">
+                    <span class="about-highlight-number font-carmo" aria-hidden="true">07</span>
+                    <div>
+                        <h3 class="font-carmo">Деревенский дом со всеми удобствами</h3>
+                        <p class="font-nunito">Внутри — атмосферная обеденная зона, оборудованная кухня с видом, душ и туалет. Есть горячая вода, которая поступает из собственной скважины.</p>
+                    </div>
+                </li>
+
+                <li class="about-highlight">
+                    <span class="about-highlight-number font-carmo" aria-hidden="true">08</span>
+                    <div>
+                        <h3 class="font-carmo">Настоящая русская печь</h3>
+                        <p class="font-nunito">Печь полностью действующая. В доме есть необходимая утварь, поэтому возле огня можно не только согреться, но и попробовать приготовить еду.</p>
+                    </div>
+                </li>
+
+                <li class="about-highlight">
+                    <span class="about-highlight-number font-carmo" aria-hidden="true">09</span>
+                    <div>
+                        <h3 class="font-carmo">Свой пруд рядом с домом</h3>
+                        <p class="font-nunito">Пруд находится на участке, сразу за ограждением основной территории. Здесь можно спокойно посидеть с удочкой и половить небольших карасиков.</p>
+                    </div>
+                </li>
+
+                <li class="about-highlight">
+                    <span class="about-highlight-number font-carmo" aria-hidden="true">10</span>
+                    <div>
+                        <h3 class="font-carmo">Уютные вечера в любую погоду</h3>
+                        <p class="font-nunito">В доме есть Wi‑Fi, телевизор, DVD-проигрыватель, домашняя коллекция фильмов, мультфильмов и сериалов, а также ретро-приставка с классическими 8- и 16-битными играми.</p>
+                    </div>
+                </li>
+
+                <li class="about-highlight">
+                    <span class="about-highlight-number font-carmo" aria-hidden="true">11</span>
+                    <div>
+                        <h3 class="font-carmo">Можно с воспитанными домашними животными</h3>
+                        <p class="font-nunito">Необязательно оставлять любимца дома: приезд с питомцем возможен при ответственном отношении и по предварительному согласованию.</p>
+                    </div>
+                </li>
+
+                <li class="about-highlight about-highlight-accent">
+                    <span class="about-highlight-number font-carmo" aria-hidden="true">12</span>
+                    <div>
+                        <h3 class="font-carmo">Атмосферное патио и еда на открытом огне</h3>
+                        <p class="font-nunito">Заглублённое патио защищает от ветра и создаёт особую атмосферу для вечерних посиделок у костра. Всё необходимое для шашлыка, гриля и приготовления еды на открытом огне уже есть.</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
     </section>
 
     <!-- РАЗМЕЩЕНИЕ -->
@@ -457,7 +696,8 @@
             <div class="description-block width-50">
                 <h3 class="font-carmo f-size-30 margin-top-15">Домик на дереве</h3>
                 <p class="font-nunito margin-top-15 f-size-18">
-                    Домик на дереве – это не только целое приключение, но и два полноценных спальных места.
+                    Настоящее место из детских мечтаний — для игр, секретных посиделок, фантазий и маленьких приключений.
+                    А при желании здесь можно даже переночевать.
                 </p>
                 <p class="font-nunito margin-top-15 f-size-18">
                     Ночёвка в домике на дереве — это непередаваемые впечатления: кромешная темнота вокруг,
@@ -480,12 +720,12 @@
 
                 <figure class="js_gallery_card gallery-cover-seo fade-in-block">
                     <img src="./img/tree-house-interior.webp"
-                         alt="Домик на дереве с двумя спальными местами в Полянках">
+                         alt="Уютный интерьер домика на дереве для игр и отдыха в Полянках">
                     <figcaption class="gallery-slide-description-seo">
                         <h3 class="font-carmo f-size-30">Игры, отдых и красивый вид</h3>
                         <p class="font-nunito f-size-16">
-                            Внутри оборудованы два полноценных спальных места. Можно остаться на ночь,
-                            слушать звуки леса, а утром проснуться под пение птиц среди зелени.
+                            Внутри можно играть, устраивать уютные посиделки и воплощать собственные детские мечты.
+                            А при желании — остаться на ночь, слушать звуки леса и проснуться под пение птиц.
                         </p>
                     </figcaption>
                 </figure>
@@ -580,9 +820,9 @@
                 <figcaption>
                     <h3 class="font-carmo f-size-30 margin-top-15">Домик на дереве</h3>
                     <p class="font-nunito margin-top-15 f-size-18">
-                        Настоящее место для приключений: внутри оборудованы два полноценных спальных места,
-                        а снаружи ждут горка и троллей. Добавьте свежий воздух, игры и немного фантазии —
-                        получится куча хорошего настроения для детей и взрослых.
+                        Настоящее место из детских мечтаний для игр, посиделок и собственных приключений,
+                        а при желании здесь можно даже переночевать. Снаружи ждут горка и троллей —
+                        добавьте свежий воздух и немного фантазии, и получится куча хорошего настроения.
                     </p>
                 </figcaption>
             </div>
@@ -769,18 +1009,18 @@
             <div class="pricing-grid">
                 <article class="price-card price-card-weekdays">
                     <div class="price-card-top">
-                        <span class="price-badge font-nunito">Будние дни</span>
-                        <h3 class="font-carmo">С понедельника по пятницу</h3>
+                        <span class="price-badge font-nunito">Понедельник — пятница</span>
+                        <h3 class="font-carmo">Пакет «Будние дни»</h3>
                     </div>
                     <div class="price-value font-carmo">
-                        <strong>550</strong>
+                        <strong>600</strong>
                         <span>BYN</span>
                     </div>
                     <p class="price-for font-nunito">за весь период · до 5 человек</p>
-                    <div class="price-breakdown font-nunito" aria-label="Расчёт стоимости буднего тарифа">
+                    <div class="price-breakdown font-nunito" aria-label="Расчёт стоимости пакета «Будние дни»">
                         <span><strong>4–5</strong> суток</span>
-                        <span><strong>от 110</strong> рублей в сутки</span>
-                        <span><strong>от 22</strong> рублей с человека в сутки</span>
+                        <span><strong>от 120</strong> рублей в сутки</span>
+                        <span><strong>от 25</strong> рублей с человека в сутки</span>
                     </div>
                     <ul class="price-details font-nunito">
                         <li>Заезд — утром в понедельник</li>
@@ -791,18 +1031,18 @@
 
                 <article class="price-card price-card-weekend">
                     <div class="price-card-top">
-                        <span class="price-badge font-nunito">Выходные</span>
-                        <h3 class="font-carmo">С вечера пятницы по воскресенье</h3>
+                        <span class="price-badge font-nunito">Пятница — воскресенье</span>
+                        <h3 class="font-carmo">Пакет «Выходные»</h3>
                     </div>
                     <div class="price-value font-carmo">
-                        <strong>350</strong>
+                        <strong>400</strong>
                         <span>BYN</span>
                     </div>
                     <p class="price-for font-nunito">за весь период · до 5 человек</p>
-                    <div class="price-breakdown font-nunito" aria-label="Расчёт стоимости тарифа выходного дня">
+                    <div class="price-breakdown font-nunito" aria-label="Расчёт стоимости пакета «Выходные»">
                         <span><strong>2</strong> суток</span>
-                        <span><strong>175</strong> рублей в сутки</span>
-                        <span><strong>35</strong> рублей с человека в сутки</span>
+                        <span><strong>200</strong> рублей в сутки</span>
+                        <span><strong>от 40</strong> рублей с человека в сутки</span>
                     </div>
                     <ul class="price-details font-nunito">
                         <li>Заезд — вечером в пятницу</li>

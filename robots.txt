@@ -1,0 +1,20 @@
+# polyanki.by robots.txt
+
+# Публичный сайт: разрешаем индексацию поисковым роботам и AI-поиску.
+User-agent: *
+Allow: /
+
+# OpenAI / ChatGPT Search
+User-agent: OAI-SearchBot
+Allow: /
+
+# Perplexity AI Search
+User-agent: PerplexityBot
+Allow: /
+
+# Робот OpenAI для обучения моделей.
+# Для появления в ChatGPT Search он не требуется.
+User-agent: GPTBot
+Disallow: /
+
+Sitemap: https://polyanki.by/sitemap.xml

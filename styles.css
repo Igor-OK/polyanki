@@ -345,6 +345,79 @@ main {
     box-sizing: border-box;
 }
 
+/* На широких экранах заголовок размещения выравниваем по основному контенту. */
+#deploy > header {
+    padding: 18px 100px 0;
+}
+
+/* Краткая суть предложения в разделе «О нас» */
+.about-highlights {
+    padding: 76px 100px 82px;
+    background: #fff;
+}
+.about-highlights-intro {
+    max-width: 840px;
+    margin-bottom: 38px;
+}
+.about-highlights-kicker {
+    display: block;
+    margin-bottom: 10px;
+    color: #8b4e49;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+.about-highlights-intro h2 {
+    max-width: 720px;
+    line-height: 1.05;
+}
+.about-highlights-intro p {
+    max-width: 760px;
+    margin-top: 16px;
+    color: #686868;
+    line-height: 1.55;
+}
+.about-highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    list-style: none;
+}
+.about-highlight {
+    min-height: 220px;
+    padding: 25px 24px 26px;
+    box-sizing: border-box;
+    border: 1px solid #e5e1d8;
+    border-radius: 17px;
+    background: #f8f7f3;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+.about-highlight:nth-child(3n + 2) { background: #f0f2ec; }
+.about-highlight-accent {
+    border-color: #d9c9bd;
+    background: #f5ebe6;
+}
+.about-highlight-number {
+    min-width: 34px;
+    color: #a6534c;
+    font-size: 25px;
+    line-height: 1;
+}
+.about-highlight h3 {
+    color: #515151;
+    font-size: 23px;
+    line-height: 1.08;
+}
+.about-highlight p {
+    margin-top: 13px;
+    color: #696969;
+    font-size: 14px;
+    line-height: 1.52;
+}
+
 .activity-image {
     overflow: hidden;
 }
@@ -936,6 +1009,19 @@ a.contact-card-primary:focus-visible {
     .row.height-450, .row.height-250 { height: auto; }
     .width-35, .width-40, .width-45, .width-50, .width-55, .width-60, .width-65 { width: 100%; }
     .description-block { padding: 40px 24px; }
+    .about-highlights { padding: 48px 20px 54px; }
+    .about-highlights-intro { margin-bottom: 27px; padding: 0 4px; }
+    .about-highlights-kicker { font-size: 12px; line-height: 1.4; }
+    .about-highlights-grid { grid-template-columns: 1fr; gap: 11px; }
+    .about-highlight {
+        min-height: 0;
+        padding: 22px 19px;
+        border-radius: 15px;
+        gap: 12px;
+    }
+    .about-highlight-number { min-width: 31px; font-size: 23px; }
+    .about-highlight h3 { font-size: 22px; }
+    .about-highlight p { margin-top: 10px; font-size: 15px; line-height: 1.55; }
     .f-size-36 { font-size: 34px; line-height: 1.05; }
     .f-size-30 { font-size: 28px; line-height: 1.1; }
     .f-size-18 { font-size: 16px; line-height: 1.55; }
@@ -959,10 +1045,10 @@ a.contact-card-primary:focus-visible {
     #deploy article:nth-of-type(even) .description-block { order: 2; }
     #deploy article:nth-of-type(even) .image-block { order: 1; }
     #activities > h2 { padding: 48px 24px 28px; }
-    #activities article { padding: 0 0 34px; }
+    #activities article { padding: 0 0 48px; }
     #activities { padding-bottom: 18px; }
     #activities .activity-image { height: 250px; }
-    #activities .activity-description { padding: 28px 24px 10px; }
+    #activities .activity-description { padding: 16px 24px 8px; }
     .pricing-container { margin: 0; padding: 0 20px; }
     .pricing-intro { margin-bottom: 28px; }
     .pricing-grid { grid-template-columns: 1fr; gap: 14px; }

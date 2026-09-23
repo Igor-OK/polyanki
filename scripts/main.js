@@ -221,3 +221,33 @@ if (navToggle && navigation) {
         if (window.innerWidth > 767) closeMenu();
     });
 }
+
+/*
+ * Конверсию Google Ads отправляем только после осознанного клика по телефонной ссылке.
+ * Небольшая задержка даёт тегу время передать событие и не мешает звонку, если Google
+ * Tag заблокирован браузером или расширением: запасной таймер всё равно откроет tel-ссылку.
+ */
+document.querySelectorAll('a[href^="tel:"]').forEach(phoneLink => {
+    phoneLink.addEventListener('click', event => {
+        if (typeof window.gtag !== 'function') return;
+
+        event.preventDefault();
+
+        const phoneUrl = phoneLink.href;
+        let callOpened = false;
+
+        const openCall = () => {
+            if (callOpened) return;
+            callOpened = true;
+            window.location.href = phoneUrl;
+        };
+
+        window.gtag('event', 'conversion', {
+            send_to: 'AW-18469653415/X2BYCP2Fp4IdEKeXgudE',
+            event_callback: openCall,
+            event_timeout: 700
+        });
+
+        window.setTimeout(openCall, 700);
+    });
+});

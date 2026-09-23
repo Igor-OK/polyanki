@@ -31,4 +31,3 @@
 
 - [Sitemap](https://polyanki.by/sitemap.xml): перечень опубликованных индексируемых материалов.
 - [Robots](https://polyanki.by/robots.txt): правила доступа автоматических клиентов.
-

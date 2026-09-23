@@ -357,4 +357,3 @@
 - PDF-презентация: https://polyanki.by/files/arenda-doma-dlya-otdyha-s-detmi-belarus-belyi-bereg.pdf
 - Sitemap: https://polyanki.by/sitemap.xml
 - Robots: https://polyanki.by/robots.txt
-
